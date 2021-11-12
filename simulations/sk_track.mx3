@@ -1,0 +1,31 @@
+/* Template for the example simulations of the ALMA Tutorials 2021 MuMax3 workshop.
+   Author: Dr. David Cortés-Ortuño
+   Utrecht University
+   d.i.cortes@uu.nl
+*/
+
+// Track length
+Lx := 300e-9
+Ly := 40e-9
+Lz := 0.4e-9
+
+// Number of cells (power of 2) -> discretization of ~1.25
+nx := pow(2, 6) * 4
+ny := 32
+nz := 1
+
+// Set mesh and disk geometry
+SetGridSize(nx, ny, nz)
+SetCellSize(Lx / nx, Ly / ny, Lz / nz)
+SetPBC(1, 0, 0)
+
+Msat        = 580e3
+Aex         = 15e-12
+Ku1         = 0.8e6
+anisU       = vector(0, 0, 1)
+Dind        = 3e-3
+// No Demag:
+// NoDemagSpins = 1
+
+// Initial state
+// ...

@@ -1,0 +1,27 @@
+/* Template for the example simulations of the ALMA Tutorials 2021 MuMax3 workshop.
+   Author: Dr. David Cortés-Ortuño
+   Utrecht University
+   d.i.cortes@uu.nl
+*/
+
+// Standard problem 3
+N := 64
+SetGridSize(N, N, N)
+// Setting the initial state
+Lmin := 8.0
+Lmax := 9.0
+Lstep := 0.05
+L := Lmin
+setcellsize(L/N, L/N, L/N)
+// Initial magnetization (xy-plane)
+m = vortex(1, -1)
+// Parameters in reduced units -> lex = 1.0
+Msat = sqrt(2 / mu0)
+Aex = 1.0
+Ku1 = 0.1
+anisU = vector(1, 0, 0)
+tableadd(E_total)
+tableaddvar(L, "L", "")
+for L = Lmin ; L <= Lmax; L += Lstep {
+// ...
+}

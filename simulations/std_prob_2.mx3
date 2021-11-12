@@ -1,0 +1,24 @@
+/* Template for the example simulations of the ALMA Tutorials 2021 MuMax3 workshop.
+   Author: Dr. David Cortés-Ortuño
+   Utrecht University
+   d.i.cortes@uu.nl
+*/
+
+// Standard problem 2
+lex := 5e-9
+d := 30 * lex
+lx := 5 * d
+ly := 1 * d
+lz := 0.1 * d
+Ms := 1.0 / mu0 // 1 Tesla
+Msat = Ms // Or: Msat.Set(Ms)
+Aex = 0.5 * mu0 * lex * lex * pow(Ms, 2)
+nx := pow(2, ilogb(lx / (0.5 * lex)) + 1)
+ny := pow(2, ilogb(ly / (0.5 * lex)) + 1)
+Print(nx, ny)
+SetGridSize(nx, ny, 1)
+SetCellSize(lx / nx, ly / ny, lz / 1.)
+// alpha = 0.02
+m = uniform(1., 1., 0.9)
+SaveAs(m, "m_initial")
+// ...
