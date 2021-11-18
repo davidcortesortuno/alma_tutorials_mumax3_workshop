@@ -10,7 +10,15 @@ This repository contains the basic material for the MuMax3 workshop for the
 ALMA Tutorials web series. 
 
 In the `notebook` folder you can find a notebook that can be run in the Google
-Colab machines.
+Colab machines. In addition, you can find a notebook with the data analysis
+shown durin the workshop. 
+
+## Extras
+
+To analyse `ovf` files and MuMax3 data I recommend you take a look at the
+[OOMMFPy](https://github.com/davidcortesortuno/oommfpy) library :smile:
+
+You can also convert your data files to Python using `mumax3-convert -numpy`.
 
 ## Credits to: 
 
