@@ -1,0 +1,66 @@
+/* Template for the example simulations of the ALMA Tutorials 2021 MuMax3 workshop.
+   Author: Dr. David Cortés-Ortuño
+   Utrecht University
+   d.i.cortes@uu.nl
+*/
+
+// Track length
+Lx := 300e-9
+Ly := 40e-9
+Lz := 0.4e-9
+
+// Number of cells (power of 2) -> discretization of ~1.25
+nx := pow(2, 8)
+ny := 32
+nz := 1
+
+// Set mesh and disk geometry
+SetGridSize(nx, ny, nz)
+SetCellSize(Lx / nx, Ly / ny, Lz / nz)
+SetPBC(1, 0, 0)
+
+// SetMesh(nx, ny, nz, Lx / nx, Ly / ny, Lz / nz, 1, 0, 0) 
+
+Msat        = 580e3
+Aex         = 15e-12
+Ku1         = 0.8e6
+anisU       = vector(0, 0, 1)
+Dind        = 3e-3
+// No Demag:
+// NoDemagSpins = 1
+// EnableDemag = false
+
+// Define a notch (higher anisotropy)
+DefRegion(1, Rect(40e-9, 40e-9).rotZ(45 * pi / 180).transl(0, 30e-9, 0))
+snapshot(regions)
+
+Ku1.setRegion(1, 1.2e6)
+anisU.setRegion(1, vector(0, 0, 1))
+
+// Initial state
+m = uniform(0, 0, 1)
+m.setinshape(Circle(20e-9).transl(-120e-9, 0, 0), NeelSkyrmion(1, -1).transl(-120e-9, 0, 0))
+
+snapshotas(m, "initial_state.png")
+
+// Relax the skyrmion from the initial state
+minimize()
+// relax()
+
+snapshotas(m, "initial_state_relaxed.png")
+
+// Dynamics
+alpha = 0.3
+// Zhang-Li torque parameters
+pol = 0.4
+j = vector(-1e12, 0, 0)
+xi = 0.30
+
+tableAdd(ext_bubblepos)
+tableadd(ext_topologicalcharge)
+
+autosave(m, 5e-11)
+tableautosave(5e-11)
+
+ns := 1e-9
+run(6 * ns)
